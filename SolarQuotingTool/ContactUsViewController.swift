@@ -23,9 +23,24 @@ class ContactUsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupToHideKeyboardOnTapOnView()
+        
         var borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
         ContactUsTextBox.layer.borderWidth = 0.5
         ContactUsTextBox.layer.borderColor = borderColor.cgColor
         ContactUsTextBox.layer.cornerRadius = 5.0
+    }
+    
+    func setupToHideKeyboardOnTapOnView() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.dismissKeyboard))
+        
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

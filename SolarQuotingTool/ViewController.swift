@@ -47,8 +47,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var quoteResultField: UITextField!
     
     @IBAction func calculateButton(_ sender: UIButton) {
-        var solarPanels = Double(numSolarPanelsField.text!)
-        var wattage = Double(wattageField.text!)
+        var solarPanels = Double(numSolarPanelsField.text!) ?? 00
+        var wattage = Double(wattageField.text!) ?? 00
         
         // initialize/defaults
         if solarPanels == nil {
@@ -59,7 +59,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         // calculation
-        let result = calculateQuote(solarPanelsIn: solarPanels ?? 0)
+        let result = calculateQuote(solarPanelsIn: solarPanels)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         guard let formattedNumber = numberFormatter.string(from: NSNumber(value: result)) else { return }
@@ -79,7 +79,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let inverter = String(selectedInverter)
         let quote = quoteResultField.text!
         // text to share
-            let shareText = "SolX installation quote:  \(quote)\n\tSolar Panels: \(solarPanels!)\n\tModule: \(module)\n\tWattage: \(wattage!)\n\tInverter: \(inverter)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
+            let shareText = "SolX installation quote:  \(quote)\n\tSolar Panels: \(solarPanels)\n\tModule: \(module)\n\tWattage: \(wattage)\n\tInverter: \(inverter)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
        
         let textToShare = [ shareText ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
@@ -96,6 +96,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupToHideKeyboardOnTapOnView()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -109,6 +110,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         inverterPicker.delegate = self
         quoteResultField.delegate = self
         
+    }
+    
+    func setupToHideKeyboardOnTapOnView() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.dismissMyKeyboard))
+        
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
