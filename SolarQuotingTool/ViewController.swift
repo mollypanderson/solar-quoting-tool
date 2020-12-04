@@ -41,7 +41,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         // calculation
-        let result = calculateQuote(solarPanelsIn: solarPanels ?? 0, wattageIn: wattage ?? 0)
+        let result = calculateQuote(solarPanelsIn: solarPanels ?? 0)
         quoteResultField.text = String(format: "$%.2f", result)
     }
     
@@ -56,7 +56,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let wattage = Double(wattageField.text!)
         let quote = quoteResultField.text!
         // text to share
-            let shareText = "SolX Solar installation quote:  \(quote)\n\tSolar Panels: \(solarPanels!)\n\tWattage: \(wattage!)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
+            let shareText = "SolX installation quote:  \(quote)\n\tSolar Panels: \(solarPanels!)\n\tWattage: \(wattage!)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
        
         let textToShare = [ shareText ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
@@ -100,8 +100,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 }
     
-    func calculateQuote(solarPanelsIn: Double, wattageIn: Double) -> Double {
-        let result = solarPanelsIn + wattageIn
+func calculateQuote(solarPanelsIn: Double) -> Double {
+        let result = 9710 + (solarPanelsIn * 178)
         return result
     }
 
