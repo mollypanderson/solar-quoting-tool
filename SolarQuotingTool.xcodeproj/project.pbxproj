@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		ADA73958256B706400BE2929 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA73956256B706400BE2929 /* Main.storyboard */; };
 		ADA7395A256B706600BE2929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA73959256B706600BE2929 /* Assets.xcassets */; };
 		ADA7395D256B706600BE2929 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA7395B256B706600BE2929 /* LaunchScreen.storyboard */; };
+		ADAF041A2579E34B00D99091 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAF04192579E34B00D99091 /* ContactUsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		ADA73959256B706600BE2929 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADA7395C256B706600BE2929 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADA7395E256B706600BE2929 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADAF04192579E34B00D99091 /* ContactUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				ADA73950256B706400BE2929 /* AppDelegate.swift */,
 				ADA73952256B706400BE2929 /* SceneDelegate.swift */,
 				ADA73954256B706400BE2929 /* ViewController.swift */,
+				ADAF04192579E34B00D99091 /* ContactUsViewController.swift */,
 				ADA73956256B706400BE2929 /* Main.storyboard */,
 				ADA73959256B706600BE2929 /* Assets.xcassets */,
 				ADA7395B256B706600BE2929 /* LaunchScreen.storyboard */,
@@ -103,7 +106,7 @@
 				};
 			};
 			buildConfigurationList = ADA73948256B706400BE2929 /* Build configuration list for PBXProject "SolarQuotingTool" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -141,6 +144,7 @@
 				ADA73955256B706400BE2929 /* ViewController.swift in Sources */,
 				ADA73951256B706400BE2929 /* AppDelegate.swift in Sources */,
 				ADA73953256B706400BE2929 /* SceneDelegate.swift in Sources */,
+				ADAF041A2579E34B00D99091 /* ContactUsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +220,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +274,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -287,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 254LFFNPUX;
 				INFOPLIST_FILE = SolarQuotingTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 254LFFNPUX;
 				INFOPLIST_FILE = SolarQuotingTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

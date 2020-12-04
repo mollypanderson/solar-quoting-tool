@@ -8,12 +8,24 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 5
+    }
+    
 
     @IBOutlet weak var numSolarPanelsField: UITextField!
     @IBOutlet weak var modulePicker: UIPickerView!
+    private var modulePickerOptions = [
+        "Canadian Solar (41c/watt)", "Axitec (44c/watt", "thingthree", "thingfour", "thingfive"
+    ]
+    
     @IBOutlet weak var wattageField: UITextField!
     @IBOutlet weak var inverterPicker: UIPickerView!
+    private var inverterPickerOptions = [
+        "Microinverter", "Solaredge Line Inverter + Optimizer"
+    ]
+    
     @IBOutlet weak var quoteResultField: UITextField!
     
     @IBAction func calculateButton(_ sender: UIButton) {
@@ -34,9 +46,28 @@ class ViewController: UIViewController {
     }
     
     @IBAction func contactSolXButton(_ sender: UIButton) {
+        let controller = storyboard?.instantiateViewController(identifier: "Contact Us") as! ContactUsViewController
+        present(controller, animated: true, completion: nil)
+        
     }
     
     @IBAction func shareQuoteButton(_ sender: UIButton) {
+        let solarPanels = Double(numSolarPanelsField.text!)
+        let wattage = Double(wattageField.text!)
+        let quote = quoteResultField.text!
+        // text to share
+            let shareText = "SolX Solar installation quote:  \(quote)\n\tSolar Panels: \(solarPanels!)\n\tWattage: \(wattage!)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
+       
+        let textToShare = [ shareText ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ //UIActivity.ActivityType.airDrop, //UIActivity.ActivityType.postToFacebook
+        ]
+
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     
@@ -56,6 +87,14 @@ class ViewController: UIViewController {
         quoteResultField.delegate = self
     }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return modulePickerOptions.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return modulePickerOptions[row]
+    }
+    
     @objc func dismissMyKeyboard() {
         view.endEditing(true)
     }
@@ -65,7 +104,7 @@ class ViewController: UIViewController {
         let result = solarPanelsIn + wattageIn
         return result
     }
-    
+
     extension ViewController : UITextFieldDelegate {
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
