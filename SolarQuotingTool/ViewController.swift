@@ -10,16 +10,21 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 5
+        return 1
     }
     
 
     @IBOutlet weak var numSolarPanelsField: UITextField!
     @IBOutlet weak var modulePicker: UIPickerView!
-    private var modulePickerOptions = [
+    private let modulePickerOptions = [
         "Canadian Solar (41c/watt)", "Axitec (44c/watt", "thingthree", "thingfour", "thingfive"
     ]
-    
+
+    @IBAction func moduleButtonPressed(_ sender: UIButton) {
+        let row = modulePicker.selectedRow(inComponent: 0)
+        let selectedModule = modulePickerOptions[row]
+        
+    }
     @IBOutlet weak var wattageField: UITextField!
     @IBOutlet weak var inverterPicker: UIPickerView!
     private var inverterPickerOptions = [
@@ -42,7 +47,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         // calculation
         let result = calculateQuote(solarPanelsIn: solarPanels ?? 0)
-        quoteResultField.text = String(format: "$%.2f", result)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        guard let formattedNumber = numberFormatter.string(from: NSNumber(value: result)) else { return }
+        quoteResultField.text = formattedNumber
     }
     
     @IBAction func contactSolXButton(_ sender: UIButton) {
