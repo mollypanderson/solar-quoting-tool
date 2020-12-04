@@ -13,23 +13,36 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return 1
     }
     
+    var selectedModule = "";
+    var selectedInverter = "";
 
+    @IBOutlet weak var introText: UILabel!
     @IBOutlet weak var numSolarPanelsField: UITextField!
+    
+    //module picker
     @IBOutlet weak var modulePicker: UIPickerView!
     private let modulePickerOptions = [
-        "Canadian Solar (41c/watt)", "Axitec (44c/watt", "thingthree", "thingfour", "thingfive"
+        "Monocrystalline", "Polycrystalline", "Thin-film"
     ]
 
     @IBAction func moduleButtonPressed(_ sender: UIButton) {
         let row = modulePicker.selectedRow(inComponent: 0)
-        let selectedModule = modulePickerOptions[row]
+        selectedModule = modulePickerOptions[row]
         
     }
+    
     @IBOutlet weak var wattageField: UITextField!
+    
+    //inverter picker
     @IBOutlet weak var inverterPicker: UIPickerView!
     private var inverterPickerOptions = [
         "Microinverter", "Solaredge Line Inverter + Optimizer"
     ]
+    
+    @IBAction func inverterButtonPressed(_ sender: UIButton) {
+        let row = inverterPicker.selectedRow(inComponent: 0)
+        selectedInverter = inverterPickerOptions[row]
+    }
     
     @IBOutlet weak var quoteResultField: UITextField!
     
@@ -60,11 +73,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func shareQuoteButton(_ sender: UIButton) {
-        let solarPanels = Double(numSolarPanelsField.text!)
-        let wattage = Double(wattageField.text!)
+        let solarPanels = Int(numSolarPanelsField.text!)
+        let wattage = Int(wattageField.text!)
+        let module = String(selectedModule)
+        let inverter = String(selectedInverter)
         let quote = quoteResultField.text!
         // text to share
-            let shareText = "SolX installation quote:  \(quote)\n\tSolar Panels: \(solarPanels!)\n\tWattage: \(wattage!)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
+            let shareText = "SolX installation quote:  \(quote)\n\tSolar Panels: \(solarPanels!)\n\tModule: \(module)\n\tWattage: \(wattage!)\n\tInverter: \(inverter)\n\nVisit sammamishsolar.com or contact info@solx2.com to schedule an on-site inspection!"
        
         let textToShare = [ shareText ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
@@ -89,18 +104,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             view.addGestureRecognizer(tap)
         
         numSolarPanelsField.delegate = self
-      //  modulePicker.delegate = self
+        modulePicker.delegate = self
         wattageField.delegate = self
-       // inverterPicker.delegate = self
+        inverterPicker.delegate = self
         quoteResultField.delegate = self
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return modulePickerOptions.count
+        
+        if pickerView.tag == 1 {
+            return modulePickerOptions.count
+        } else {
+            return inverterPickerOptions.count
+        }
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return modulePickerOptions[row]
+        
+        if pickerView.tag == 1 {
+            return modulePickerOptions[row]
+        } else {
+            return inverterPickerOptions[row]
+        }
     }
     
     @objc func dismissMyKeyboard() {
