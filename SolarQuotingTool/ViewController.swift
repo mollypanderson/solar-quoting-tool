@@ -73,8 +73,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func shareQuoteButton(_ sender: UIButton) {
-        let solarPanels = Int(numSolarPanelsField.text!)
-        let wattage = Int(wattageField.text!)
+        let solarPanels = Int(numSolarPanelsField.text!) ?? 0
+        let wattage = Int(wattageField.text!) ?? 0
         let module = String(selectedModule)
         let inverter = String(selectedInverter)
         let quote = quoteResultField.text!
